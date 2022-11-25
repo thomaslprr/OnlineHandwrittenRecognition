@@ -52,7 +52,6 @@ def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = 
         prob = probs[i]
         if prob > min_threshol:
             result[x] = prob
-
     return result
 
 
