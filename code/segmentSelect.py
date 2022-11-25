@@ -30,12 +30,11 @@ def computeProbSeg(alltraces, hyp,model,image_transforms,saveIm = False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 28)
     if saveIm:
         imsave(hyp[0] + '.png', im)
-        classes = ['0','1']
-        prob  = classify(model,image_transforms,hyp[0] + '.png',classes)
-        return prob[0][1]
-    
-    ##### call your classifier ! #####
-    return random.random()
+        
+     ##### call your classifier ! #####
+    classes = ['0','1']
+    prob  = classify(model,image_transforms,im,classes)
+    return prob[0][1]
 
 def main():
 

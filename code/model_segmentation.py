@@ -51,10 +51,10 @@ def get_model(path):
             newModel.load_state_dict(content, strict=False)
     return newModel
 
-def classify(model,image_transforms,image_path,classes):
+def classify(model,image_transforms,im,classes):
 
   model = model.eval()
-  image = Image.open(image_path)
+  image = Image.fromarray(im.astype('uint8'), 'L')
   image = image_transforms(image).float()
   image = image.unsqueeze(0)
 
