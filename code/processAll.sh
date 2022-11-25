@@ -27,13 +27,13 @@ do
 	echo "Recognize: $file"
 	BNAME=`basename $file .inkml`
 	OUT="$OUTDIR/$BNAME.lg"
-	python3 segmenter.py -i $file -o hyp_$OUT 
+	python3 ./code/segmenter.py -i $file -o $OUT 
 	ERR=$? # test de l'erreur au cas où...
-	 python3 segmentSelect.py -o seg_$OUT  $file hyp_$OUT  
+	 python3 ./code/segmentSelect.py -o $OUT  $file $OUT  
 	ERR=$ERR || $?
-	 python3 symbolReco.py  -o symb_$OUT $file seg_$OUT  
+	 python3 ./code/symbolReco.py  -o $OUT $file $OUT  
 	ERR=$ERR || $?
-	 python3 selectBestSeg.py -o $OUT symb_$OUT 
+	 python3 ./code/selectBestSeg.py -o $OUT $OUT 
 	ERR=$ERR || $?
 	
 	if [ $ERR -ne 0 ]

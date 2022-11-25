@@ -58,4 +58,5 @@ def classify(model,image_transforms,im,classes):
   prob = nn.functional.softmax(output,dim=1)
   _,predicted = torch.max(output.data,1)
 
-  return ((prob[0][0].item(),prob[0][1].item()),predicted)
+  probByClass = [prob[0][i].item() for i in range(len(prob[0]))]
+  return probByClass

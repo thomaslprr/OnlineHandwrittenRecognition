@@ -37,7 +37,7 @@ def parseLGscore(LG):
 
 
 def selectBestSeg(LGlist):
-    # sort by decreasing score
+    # sort by increasing score
     LGlist.sort(key= lambda x : x['sc'])
     setStr =  set()
     bestLG = []

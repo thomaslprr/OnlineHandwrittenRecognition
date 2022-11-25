@@ -33,7 +33,7 @@ Keep only the classes with a score higher than a threshold
 """
 
 def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = False):
-    im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 28)
+    im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 32)
     if saveIm:
         imsave(hyp[0] + '.png', im)
     # create the list of possible classes (maybe connected to your classifier ???)
@@ -46,15 +46,10 @@ def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = 
                       'sigma', 'sin', 'sqrt', 'sum', 't', 'tan', 'theta', 'times', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
                       
     ##### call your classifier and fill the results ! #####
-    prob  = classify(model,image_transforms,im,classes)
-    print(prob)
+    probs  = classify(model,image_transforms,im,classes)
     result = {}
-    # artificially simulate network output (sum(p_i) = 1)
-    problist = [random.random()*random.random() for x in classes]
-    sumprob = sum(problist)
-    problistnorm = [p / sumprob for p in problist]
     for i, x in enumerate(classes):
-        prob = problistnorm[i]
+        prob = probs[i]
         if prob > min_threshol:
             result[x] = prob
 
@@ -97,13 +92,13 @@ def main():
     hyplist = parseLG(hyplist)
     output = ""
 
-    model_path = "./100_classes_model.pt"
+    model_path = "./100_classes_model_aug.pt"
     image_transforms = transforms.Compose([
     transforms.Grayscale(),
     transforms.ToTensor()])
 
     model = get_model(model_path)
-
+    
     for h in hyplist:
         # for each hypo, call the classifier and keep only slected classes (only the best or more)
         prob_dict = computeClProb(traces, h, 0.05,model,image_transforms, saveimg)
