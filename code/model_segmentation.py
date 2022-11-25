@@ -3,6 +3,8 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 import PIL.Image as Image
 import torch.nn.functional as F
+import pickle
+import io
 
 
 class Net(nn.Module):
@@ -12,10 +14,10 @@ class Net(nn.Module):
         self.conv1 = nn.Conv2d(1, 8, 3, padding=1)
         self.conv2 = nn.Conv2d(8, 16, 3, padding =1)
         # linear layers
-        self.fc1 = nn.Linear(784, 256)
+        self.fc1 = nn.Linear(16*7*7, 256)
         self.fc2 = nn.Linear(256, 128)
-        self.fc3 = nn.Linear(128, 64)
-        self.fc4 = nn.Linear(64, 2) 
+        self.fc3 = nn.Linear(128, 128)
+        self.fc4 = nn.Linear(128, 2) 
         # dropout
         self.dropout = nn.Dropout(p=0.2)
         # max pooling
@@ -26,7 +28,7 @@ class Net(nn.Module):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         # flattening the image
-        x = x.view(-1, 7*7*16)
+        x = x.view(x.size(0), -1)
         # linear layers
         x = self.dropout(F.relu(self.fc1(x)))
         x = self.dropout(F.relu(self.fc2(x)))
@@ -34,11 +36,19 @@ class Net(nn.Module):
         x = self.fc4(x)
         return x
 
+
+
+
 def get_model(path):
-    #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     newModel = Net()
-    newModel.load_state_dict(torch.load(path), strict=False,map_location=torch.device('cpu'))
-    #newModel.to(device)
+
+    if torch.cuda.is_available():
+        newModel.load_state_dict(torch.load(path), strict=False)
+    else:
+        with open(path, 'rb') as f:
+            contents = f.read()
+            content = torch.load(io.BytesIO(contents), map_location='cpu')
+            newModel.load_state_dict(content, strict=False)
     return newModel
 
 def classify(model,image_transforms,image_path,classes):

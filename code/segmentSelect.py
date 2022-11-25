@@ -30,10 +30,10 @@ def computeProbSeg(alltraces, hyp,model,image_transforms,saveIm = False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 28)
     if saveIm:
         imsave(hyp[0] + '.png', im)
-
-    classes = ['0','1']
-    prob  = classify(model,image_transforms,hyp[0] + '.png',classes)
-    print("prob : {:}".format(prob))
+        classes = ['0','1']
+        prob  = classify(model,image_transforms,hyp[0] + '.png',classes)
+        return prob[0][1]
+    
     ##### call your classifier ! #####
     return random.random()
 
@@ -79,9 +79,9 @@ def main():
 
 
     for h in hyplist:
-        prob = computeProbSeg(traces, h, saveimg,model_path)
+        prob = computeProbSeg(traces, h,model ,image_transforms,saveimg)
         #### select your threshold
-        if prob > 0.2:
+        if prob > 0.5:
             output += "O,"+ h[0]+",*,"+str(prob)+","+",".join([str(s) for s in h[1]]) + "\n"
     if outputLG != "":
         with open(outputLG, "w") as text_file:
