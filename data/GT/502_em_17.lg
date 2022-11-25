@@ -1,0 +1,27 @@
+# IUD, IVC_2014_F502_E17
+# Objects(12):
+O, theta_1, \theta, 1.0, 3
+O, i_2, i, 1.0, 10, 11
+O, =_1, =, 1.0, 9, 8
+O, e_2, e, 1.0, 12
+O, d_2, d, 1.0, 2
+O, i_3, i, 1.0, 13, 14
+O, d_1, d, 1.0, 0
+O, _1, -, 1.0, 1
+O, i_1, i, 1.0, 5, 6
+O, e_1, e, 1.0, 4
+O, theta_2, \theta, 1.0, 7
+O, theta_3, \theta, 1.0, 15
+
+# Relations from SRT:
+EO, =_1, i_2, Right, 1.0
+EO, _1, d_1, Above, 1.0
+EO, _1, d_2, Below, 1.0
+EO, _1, e_1, Right, 1.0
+EO, d_2, theta_1, Right, 1.0
+EO, e_1, =_1, Right, 1.0
+EO, e_1, i_1, Sup, 1.0
+EO, e_2, i_3, Sup, 1.0
+EO, i_1, theta_2, Right, 1.0
+EO, i_2, e_2, Right, 1.0
+EO, i_3, theta_3, Right, 1.0

@@ -1,0 +1,13 @@
+# IUD, IVC_2014_F518_E429
+# Objects(5):
+O, =_1, =, 1.0, 4, 5
+O, \infty_3, \infty, 1.0, 6
+O, \infty_2, \infty, 1.0, 3
+O, times_1, \times, 1.0, 1, 2
+O, \infty_1, \infty, 1.0, 0
+
+# Relations from SRT:
+EO, =_1, \infty_3, Right, 1.0
+EO, \infty_1, times_1, Right, 1.0
+EO, \infty_2, =_1, Right, 1.0
+EO, times_1, \infty_2, Right, 1.0

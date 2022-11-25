@@ -1,0 +1,59 @@
+# IUD, IVC_2014_F519_E454
+# Objects(28):
+O, =_1, =, 1.0, 17, 16
+O, )_1, ), 1.0, 6
+O, x_3, x, 1.0, 14, 15
+O, f_2, f, 1.0, 19, 20
+O, x_7, x, 1.0, 37, 38
+O, g_1, g, 1.0, 8
+O, f_1, f, 1.0, 1, 2
+O, d_1, d, 1.0, 13
+O, x_5, x, 1.0, 26, 27, 28
+O, x_4, x, 1.0, 22, 23
+O, )_4, ), 1.0, 35
+O, d_3, d, 1.0, 36
+O, (_1, (, 1.0, 3
+O, x_2, x, 1.0, 10, 11
+O, (_4, (, 1.0, 32
+O, d_2, d, 1.0, 25
+O, -_2, -, 1.0, 29
+O, -_1, -, 1.0, 7
+O, (_3, (, 1.0, 21
+O, int_1, \int, 1.0, 0
+O, int_2, \int, 1.0, 18
+O, (_2, (, 1.0, 9
+O, )_3, ), 1.0, 24
+O, int_3, \int, 1.0, 30
+O, g_2, g, 1.0, 31
+O, x_6, x, 1.0, 33, 34
+O, x_1, x, 1.0, 4, 5
+O, )_2, ), 1.0, 12
+
+# Relations from SRT:
+EO, (_1, x_1, Right, 1.0
+EO, (_2, x_2, Right, 1.0
+EO, (_3, x_4, Right, 1.0
+EO, (_4, x_6, Right, 1.0
+EO, )_1, -_1, Right, 1.0
+EO, )_2, d_1, Right, 1.0
+EO, )_3, d_2, Right, 1.0
+EO, )_4, d_3, Right, 1.0
+EO, -_1, g_1, Right, 1.0
+EO, -_2, int_3, Right, 1.0
+EO, =_1, int_2, Right, 1.0
+EO, d_1, x_3, Right, 1.0
+EO, d_2, x_5, Right, 1.0
+EO, d_3, x_7, Right, 1.0
+EO, f_1, (_1, Right, 1.0
+EO, f_2, (_3, Right, 1.0
+EO, g_1, (_2, Right, 1.0
+EO, g_2, (_4, Right, 1.0
+EO, int_1, f_1, Right, 1.0
+EO, int_2, f_2, Right, 1.0
+EO, int_3, g_2, Right, 1.0
+EO, x_1, )_1, Right, 1.0
+EO, x_2, )_2, Right, 1.0
+EO, x_3, =_1, Right, 1.0
+EO, x_4, )_3, Right, 1.0
+EO, x_5, -_2, Right, 1.0
+EO, x_6, )_4, Right, 1.0

@@ -1,0 +1,25 @@
+# IUD, ISICAL_2014_F29_E158
+# Objects(11):
+O, +_1, +, 1.0, 4, 5
+O, 4_1, 4, 1.0, 2, 3
+O, alpha_1, \alpha, 1.0, 0, 1
+O, 6_1, 6, 1.0, 7
+O, +_2, +, 1.0, 8, 9
+O, alpha_3, \alpha, 1.0, 10
+O, 9_1, 9, 1.0, 16
+O, alpha_4, \alpha, 1.0, 15
+O, +_3, +, 1.0, 13, 14
+O, alpha_2, \alpha, 1.0, 6
+O, 7_1, 7, 1.0, 11, 12
+
+# Relations from SRT:
+EO, +_1, alpha_2, Right, 1.0
+EO, +_2, alpha_3, Right, 1.0
+EO, +_3, alpha_4, Right, 1.0
+EO, alpha_1, +_1, Right, 1.0
+EO, alpha_1, 4_1, Sup, 1.0
+EO, alpha_2, +_2, Right, 1.0
+EO, alpha_2, 6_1, Sup, 1.0
+EO, alpha_3, +_3, Right, 1.0
+EO, alpha_3, 7_1, Sup, 1.0
+EO, alpha_4, 9_1, Sup, 1.0

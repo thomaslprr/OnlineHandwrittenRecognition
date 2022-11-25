@@ -1,0 +1,15 @@
+# IUD, ISICAL_2014_F27_E114
+# Objects(6):
+O, d_1, d, 1.0, 8
+O, theta_1, \theta, 1.0, 6, 7
+O, 2_1, 2, 1.0, 5
+O, theta_2, \theta, 1.0, 9, 10
+O, sin_1, \sin, 1.0, 1, 3, 2, 4
+O, int_1, \int, 1.0, 0
+
+# Relations from SRT:
+EO, 2_1, theta_1, Right, 1.0
+EO, d_1, theta_2, Right, 1.0
+EO, int_1, sin_1, Right, 1.0
+EO, sin_1, 2_1, Right, 1.0
+EO, theta_1, d_1, Right, 1.0

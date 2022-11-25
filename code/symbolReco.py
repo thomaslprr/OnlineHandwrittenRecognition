@@ -9,19 +9,22 @@
 import sys
 import random
 import itertools
-import sys, getopt
-from convertInkmlToImg import parse_inkml,get_traces_data, getStrokesFromLG, convert_to_imgs, parseLG
+import sys
+import getopt
+from convertInkmlToImg import parse_inkml, get_traces_data, getStrokesFromLG, convert_to_imgs, parseLG
 from skimage.io import imsave
 from model_class import classify, get_model
 import torchvision.transforms as transforms
 
 def usage():
-    print ("usage: python3 symbolReco.py [-s] [-o fname][-w weigthFile] inkmlfile lgFile ")
-    print ("     inkmlfile  : input inkml file name ")
-    print ("     lgFile     : input LG file name")
-    print ("     -o fname / --output fname : output file name (LG file)")
-    print ("     -w fname / --weight fname : weight file name (nn pytorch file)")
-    print ("     -s         : save hyp images")
+    print(
+        "usage: python3 symbolReco.py [-s] [-o fname][-w weigthFile] inkmlfile lgFile ")
+    print("     inkmlfile  : input inkml file name ")
+    print("     lgFile     : input LG file name")
+    print("     -o fname / --output fname : output file name (LG file)")
+    print("     -w fname / --weight fname : weight file name (nn pytorch file)")
+    print("     -s         : save hyp images")
+
 
 """
 take an hypothesis (from LG = list of stroke index), select the corresponding strokes (from allTraces) and 
@@ -46,21 +49,23 @@ def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = 
     prob  = classify(model,image_transforms,im,classes)
     print(prob)
     result = {}
-    ## artificially simulate network output (sum(p_i) = 1)
+    # artificially simulate network output (sum(p_i) = 1)
     problist = [random.random()*random.random() for x in classes]
     sumprob = sum(problist)
     problistnorm = [p / sumprob for p in problist]
-    for i,x in enumerate(classes):
+    for i, x in enumerate(classes):
         prob = problistnorm[i]
         if prob > min_threshol:
             result[x] = prob
 
     return result
 
+
 def main():
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "so:w:", ["output=", "weight="])
+        opts, args = getopt.getopt(sys.argv[1:], "so:w:", [
+                                   "output=", "weight="])
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
@@ -104,7 +109,8 @@ def main():
         prob_dict = computeClProb(traces, h, 0.05,model,image_transforms, saveimg)
         #rewrite the new LG
         for cl, prob in prob_dict.items():
-            output += "O,"+ h[0]+","+cl+","+str(prob)+","+",".join([str(s) for s in h[1]]) + "\n"
+            output += "O," + h[0]+","+cl+"," + \
+                str(prob)+","+",".join([str(s) for s in h[1]]) + "\n"
     if outputLG != "":
         with open(outputLG, "w") as text_file:
             print(output, file=text_file)

@@ -1,0 +1,15 @@
+# IUD, ISICAL_2014_F26_E91
+# Objects(6):
+O, 1_1, 1, 1.0, 5
+O, k_1, k, 1.0, 0
+O, -_1, -, 1.0, 4
+O, a_1, a, 1.0, 3
+O, ]_1, ], 1.0, 6
+O, [_1, [, 1.0, 1, 2
+
+# Relations from SRT:
+EO, -_1, 1_1, Right, 1.0
+EO, [_1, a_1, Right, 1.0
+EO, a_1, -_1, Sup, 1.0
+EO, a_1, ]_1, Right, 1.0
+EO, k_1, [_1, Right, 1.0

@@ -1,0 +1,61 @@
+# IUD, IVC_2014_F504_E35
+# Objects(29):
+O, times_6, \times, 1.0, 33, 32
+O, =_1, =, 1.0, 28, 29
+O, )_1, ), 1.0, 6
+O, x_12, x, 1.0, 52, 53
+O, x_3, x, 1.0, 11, 12
+O, x_11, x, 1.0, 48, 49
+O, x_7, x, 1.0, 30, 31
+O, times_1, \times, 1.0, 3, 2
+O, times_5, \times, 1.0, 24, 23
+O, x_5, x, 1.0, 21, 22
+O, times_3, \times, 1.0, 14, 13
+O, x_10, x, 1.0, 44, 45
+O, times_2, \times, 1.0, 9, 8
+O, x_4, x, 1.0, 15, 16
+O, times_8, \times, 1.0, 43, 42
+O, (_1, (, 1.0, 7
+O, times_9, \times, 1.0, 46, 47
+O, times_10, \times, 1.0, 51, 50
+O, x_2, x, 1.0, 4, 5
+O, (_3, (, 1.0, 20
+O, times_7, \times, 1.0, 38, 37
+O, x_8, x, 1.0, 34, 35, 36
+O, times_4, \times, 1.0, 18, 19
+O, )_3, ), 1.0, 27
+O, (_2, (, 1.0, 10
+O, x_9, x, 1.0, 39, 40, 41
+O, x_6, x, 1.0, 25, 26
+O, )_2, ), 1.0, 17
+O, x_1, x, 1.0, 0, 1
+
+# Relations from SRT:
+EO, (_1, x_1, Right, 1.0
+EO, (_2, x_3, Right, 1.0
+EO, (_3, x_5, Right, 1.0
+EO, )_1, times_2, Right, 1.0
+EO, )_2, times_4, Right, 1.0
+EO, )_3, =_1, Right, 1.0
+EO, =_1, x_7, Right, 1.0
+EO, times_10, x_12, Right, 1.0
+EO, times_1, x_2, Right, 1.0
+EO, times_2, (_2, Right, 1.0
+EO, times_3, x_4, Right, 1.0
+EO, times_4, (_3, Right, 1.0
+EO, times_5, x_6, Right, 1.0
+EO, times_6, x_8, Right, 1.0
+EO, times_7, x_9, Right, 1.0
+EO, times_8, x_10, Right, 1.0
+EO, times_9, x_11, Right, 1.0
+EO, x_10, times_9, Right, 1.0
+EO, x_11, times_10, Right, 1.0
+EO, x_1, times_1, Right, 1.0
+EO, x_2, )_1, Right, 1.0
+EO, x_3, times_3, Right, 1.0
+EO, x_4, )_2, Right, 1.0
+EO, x_5, times_5, Right, 1.0
+EO, x_6, )_3, Right, 1.0
+EO, x_7, times_6, Right, 1.0
+EO, x_8, times_7, Right, 1.0
+EO, x_9, times_8, Right, 1.0
