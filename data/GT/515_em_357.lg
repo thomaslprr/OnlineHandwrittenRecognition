@@ -1,0 +1,21 @@
+# IUD, IVC_2014_F515_E357
+# Objects(9):
+O, le_1, \leq, 1.0, 5, 4
+O, 1_1, 1, 1.0, 17, 16
+O, i_2, i, 1.0, 12, 13
+O, x_2, x, 1.0, 6, 7
+O, +_1, +, 1.0, 14, 15
+O, x_3, x, 1.0, 10, 11
+O, i_1, i, 1.0, 2, 3
+O, le_2, \leq, 1.0, 8, 9
+O, x_1, x, 1.0, 0, 1
+
+# Relations from SRT:
+EO, +_1, 1_1, Right, 1.0
+EO, i_2, +_1, Right, 1.0
+EO, le_1, x_2, Right, 1.0
+EO, le_2, x_3, Right, 1.0
+EO, x_1, i_1, Sub, 1.0
+EO, x_1, le_1, Right, 1.0
+EO, x_2, le_2, Right, 1.0
+EO, x_3, i_2, Sub, 1.0

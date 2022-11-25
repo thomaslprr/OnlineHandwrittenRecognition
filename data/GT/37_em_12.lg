@@ -1,0 +1,27 @@
+# IUD, ISICAL_2014_F37_E12
+# Objects(12):
+O, =_1, =, 1.0, 6, 5
+O, x_2, x, 1.0, 10
+O, )_1, ), 1.0, 4
+O, b_1, b, 1.0, 3
+O, b_3, b, 1.0, 11
+O, u_2, u, 1.0, 7
+O, (_2, (, 1.0, 9
+O, u_1, u, 1.0, 0
+O, b_2, b, 1.0, 8
+O, x_1, x, 1.0, 2
+O, )_2, ), 1.0, 12
+O, (_1, (, 1.0, 1
+
+# Relations from SRT:
+EO, (_1, x_1, Right, 1.0
+EO, (_2, x_2, Right, 1.0
+EO, )_1, =_1, Right, 1.0
+EO, =_1, u_2, Right, 1.0
+EO, u_1, (_1, Right, 1.0
+EO, u_2, (_2, Right, 1.0
+EO, u_2, b_2, Sub, 1.0
+EO, x_1, )_1, Right, 1.0
+EO, x_1, b_1, Sub, 1.0
+EO, x_2, )_2, Right, 1.0
+EO, x_2, b_3, Sub, 1.0

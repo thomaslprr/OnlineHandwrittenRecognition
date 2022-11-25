@@ -1,0 +1,15 @@
+# IUD, ISICAL_2014_F20_E29
+# Objects(6):
+O, COMMA_1, COMMA, 1.0, 3
+O, )_1, ), 1.0, 5
+O, infin_2, \infty, 1.0, 4
+O, infin_1, \infty, 1.0, 2
+O, -_1, -, 1.0, 1
+O, (_1, (, 1.0, 0
+
+# Relations from SRT:
+EO, (_1, -_1, Right, 1.0
+EO, -_1, infin_1, Right, 1.0
+EO, COMMA_1, infin_2, Right, 1.0
+EO, infin_1, COMMA_1, Right, 1.0
+EO, infin_2, )_1, Right, 1.0

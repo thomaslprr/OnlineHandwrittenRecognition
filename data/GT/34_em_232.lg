@@ -1,0 +1,20 @@
+# IUD, ISICAL_2014_F34_E232
+# Objects(9):
+O, theta_1, \theta, 1.0, 3
+O, =_1, =, 1.0, 6, 7
+O, 1_1, 1, 1.0, 5
+O, -_2, -, 1.0, 10
+O, -_1, -, 1.0, 4
+O, t_1, t, 1.0, 2, 1
+O, t_2, t, 1.0, 8, 9
+O, theta_2, \theta, 1.0, 11
+O, AUTO_0, -, 1.0, 0
+
+# Relations from SRT:
+EO, -_1, 1_1, Right, 1.0
+EO, -_2, theta_2, Right, 1.0
+EO, =_1, t_2, Right, 1.0
+EO, t_1, -_1, Sup, 1.0
+EO, t_1, =_1, Right, 1.0
+EO, t_1, theta_1, Sub, 1.0
+EO, t_2, -_2, Sub, 1.0
