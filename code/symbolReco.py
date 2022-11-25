@@ -12,7 +12,8 @@ import itertools
 import sys, getopt
 from convertInkmlToImg import parse_inkml,get_traces_data, getStrokesFromLG, convert_to_imgs, parseLG
 from skimage.io import imsave
-
+from model_class import classify, get_model
+import torchvision.transforms as transforms
 
 def usage():
     print ("usage: python3 symbolReco.py [-s] [-o fname][-w weigthFile] inkmlfile lgFile ")
@@ -28,15 +29,22 @@ return the probability of being each symbol as a dictionnary {class_0 : score_0 
 Keep only the classes with a score higher than a threshold
 """
 
-def computeClProb(alltraces, hyp, min_threshol, saveIm = False):
+def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 28)
     if saveIm:
         imsave(hyp[0] + '.png', im)
     # create the list of possible classes (maybe connected to your classifier ???)
-    classes = list("abcdefghijklmnoprstuvwxyzABCEFXYZ0123456789+-=(){}") # one character classes
-    classes.extend(["div", "int", "sum", "pi", "gt", "geq","lt","leq"]) # add some other
+    classes = ['!', '(', ')', '+', ',', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '=',
+                 'A_', 'B_', 'C_', 'Delta', 'E_', 'F_', 'G_', 'H_', 'I_', 'L_', 'M_', 'N_', 'P_', 'R_',
+                  'S_', 'T_', 'V_', 'X_', 'Y_', '[', ']', 'a', 'alpha', 'b', 'beta', 'c', 'cos', 'd', 'div',
+                   'div_op', 'dot', 'e', 'exists', 'f', 'forall', 'g', 'gamma', 'geq', 'gt', 'h', 'i', 'in',
+                    'infty', 'int', 'j', 'k', 'l', 'lambda', 'ldots', 'leq', 'lim', 'log', 'lt', 'm', 'mu', 'n',
+                     'neq', 'o', 'p', 'phi', 'pi', 'pipe', 'pm', 'prime', 'q', 'r', 'rightarrow', 's',
+                      'sigma', 'sin', 'sqrt', 'sum', 't', 'tan', 'theta', 'times', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+                      
     ##### call your classifier and fill the results ! #####
-
+    prob  = classify(model,image_transforms,im,classes)
+    print(prob)
     result = {}
     ## artificially simulate network output (sum(p_i) = 1)
     problist = [random.random()*random.random() for x in classes]
@@ -83,9 +91,17 @@ def main():
     hyplist = open(inputLG, 'r').readlines()
     hyplist = parseLG(hyplist)
     output = ""
+
+    model_path = "./100_classes_model.pt"
+    image_transforms = transforms.Compose([
+    transforms.Grayscale(),
+    transforms.ToTensor()])
+
+    model = get_model(model_path)
+
     for h in hyplist:
         # for each hypo, call the classifier and keep only slected classes (only the best or more)
-        prob_dict = computeClProb(traces, h, 0.05, saveimg)
+        prob_dict = computeClProb(traces, h, 0.05,model,image_transforms, saveimg)
         #rewrite the new LG
         for cl, prob in prob_dict.items():
             output += "O,"+ h[0]+","+cl+","+str(prob)+","+",".join([str(s) for s in h[1]]) + "\n"
