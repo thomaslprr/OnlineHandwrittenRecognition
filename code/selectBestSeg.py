@@ -9,48 +9,55 @@
 import sys
 import random
 import itertools
-import sys, getopt
-from convertInkmlToImg import parse_inkml,get_traces_data, getStrokesFromLG, convert_to_imgs
+import sys
+import getopt
+from convertInkmlToImg import parse_inkml, get_traces_data, getStrokesFromLG, convert_to_imgs
 from skimage.io import imsave
 
 
 def usage():
-    print ("usage: python3 selectBestSeg.py  [-o fname] lgFile ")
-    print ("     lgFile     : input LG file name")
-    print ("     -o fname / --output fname : output file name (LG file)")
+    print("usage: python3 selectBestSeg.py  [-o fname] lgFile ")
+    print("     lgFile     : input LG file name")
+    print("     -o fname / --output fname : output file name (LG file)")
+
 
 """
 take a set of hypothesis (from LG = list of list of stroke indexes), select one coherent segmentation (each stroke is 
 used only once) with a greedy sub-optimal algorithm 
 """
 
+
 def parseLGscore(LG):
     sym = []
     print("LG : {:}".format(LG))
     for lg in LG:
         # Remove whitespace and split by ","
-        lg = lg.replace(" ", "").replace('\n', '').split(',')
-        #print(lg)
-        if lg[0] != "O": continue
+        lg = lg.replace(" ", "").replace('\n', '').split(';')
+        # print(lg)
+        if lg[0] != "O":
+            continue
 
         print("lg : {:}".format(lg))
         # Select symbol id and associated stroke id (only integers)
-        sym.append({'id' : lg[1], 'cl' : lg[2], 'sc' : float(lg[3]), 'strk' : set( lg[4:]) })
+        sym.append({'id': lg[1], 'cl': lg[2],
+                   'sc': float(lg[3]), 'strk': set(lg[4:])})
     return sym
 
 
 def selectBestSeg(LGlist):
     # sort by increasing score
-    LGlist.sort(key= lambda x : x['sc'])
-    setStr =  set()
+    LGlist.sort(key=lambda x: x['sc'])
+    setStr = set()
     bestLG = []
     while (len(LGlist) > 0):
         besthyp = LGlist.pop()
         bestLG.append(besthyp)
-        setStr = setStr | besthyp['strk'] #union of stroke lists
-        LGlist = list(filter(lambda x: x['strk'].isdisjoint(setStr) , LGlist)) # remove impossible hypothesis
-        #print(LGlist)
+        setStr = setStr | besthyp['strk']  # union of stroke lists
+        # remove impossible hypothesis
+        LGlist = list(filter(lambda x: x['strk'].isdisjoint(setStr), LGlist))
+        # print(LGlist)
     return bestLG
+
 
 def main():
     try:
@@ -74,15 +81,16 @@ def main():
             usage()
             assert False, "unhandled option"
 
-
     hyplist = open(inputLG, 'r').readlines()
     hypset = parseLGscore(hyplist)
-    #print(hypset)
+    # print(hypset)
     bestLG = selectBestSeg(hypset)
     #print("Best : " + str(bestLG))
     output = ""
     for symb in bestLG:
-        output += "O," + symb['id'] + "," + symb['cl'] + "," + str(symb['sc']) + "," + ",".join([str(s) for s in symb['strk']]) + "\n"
+        output += "O," + symb['id'] + "," + symb['cl'] + "," + \
+            str(symb['sc']) + "," + ",".join([str(s)
+                                              for s in symb['strk']]) + "\n"
 
     if outputLG != "":
         with open(outputLG, "w") as text_file:
