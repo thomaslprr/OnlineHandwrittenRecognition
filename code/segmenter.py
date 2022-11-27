@@ -9,10 +9,12 @@
 import sys
 import random
 import itertools
-import sys, getopt
+import sys
+import getopt
 from convertInkmlToImg import parse_inkml
 
-def generateHypSeg(nbStrk, strDict = None, nb=-1, nbStrkMax=4, k=0):
+
+def generateHypSeg(nbStrk, strDict=None, nb=-1, nbStrkMax=4, k=0):
     """generate segmentation hypothesis. If nb=-1, it will generate all seg.
     nbStrkMax is the maximum number of strokes of the generated hypothesis
     strDict is used if stroke ids are not numbered from 0 to nbStrk -1
@@ -22,7 +24,7 @@ def generateHypSeg(nbStrk, strDict = None, nb=-1, nbStrkMax=4, k=0):
     if strDict is None:
         strDict = {}
         for i in StrokesList:
-            strDict [i] = i
+            strDict[i] = i
     AllHypMatrix = []
     if (nbStrkMax > nbStrk):
         nbStrkMax = nbStrk
@@ -43,26 +45,30 @@ def generateHypSeg(nbStrk, strDict = None, nb=-1, nbStrkMax=4, k=0):
         AllHypMatrix = random.sample(AllHypMatrix, nb)
     return AllHypMatrix
 
+
 def toLG(setHyp):
     output = ""
     for i, hyp in enumerate(setHyp):
-        output += "O,hyp"+str(i) +",*,1.0,"+ ",".join([str(s) for s in hyp]) + "\n"
+        output += "O,hyp"+str(i) + ",*,1.0," + \
+            ",".join([str(s) for s in hyp]) + "\n"
 
     return output
 
 
 def usage():
-    print ("usage: python3 segmenter.py [-i fname][-o fname][-s N]")
-    print ("     -i fname / --inkml fname  : input file name (inkml file)")
-    print ("     -o fname / --output fname : output file name (LG file)")
-    print ("     -s N / --str N            : if no inkmlfile is selected, run with N strokes")
+    print("usage: python3 segmenter.py [-i fname][-o fname][-s N]")
+    print("     -i fname / --inkml fname  : input file name (inkml file)")
+    print("     -o fname / --output fname : output file name (LG file)")
+    print("     -s N / --str N            : if no inkmlfile is selected, run with N strokes")
+
 
 def main():
-    nbs = 4;
+    nbs = 2
     inputInkml = ""
     outputLG = ""
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "i:o:s:", ["inkml=", "output=", "str="])
+        opts, args = getopt.getopt(sys.argv[1:], "i:o:s:", [
+                                   "inkml=", "output=", "str="])
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
@@ -72,7 +78,7 @@ def main():
         if o in ("-s", "--str"):
             nbs = int(a)
             if nbs < 1:
-                print ("wrong parameter value : nbs should be > 0")
+                print("wrong parameter value : nbs should be > 0")
                 usage()
                 sys.exit(2)
         elif o in ("-i", "--inkml"):
@@ -91,6 +97,7 @@ def main():
             print(txtLG, file=text_file)
     else:
         print(txtLG)
+
 
 if __name__ == "__main__":
     # execute only if run as a script
