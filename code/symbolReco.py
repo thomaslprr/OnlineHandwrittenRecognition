@@ -16,6 +16,7 @@ from skimage.io import imsave
 from model_class import classify, get_model
 import torchvision.transforms as transforms
 
+
 def usage():
     print(
         "usage: python3 symbolReco.py [-s] [-o fname][-w weigthFile] inkmlfile lgFile ")
@@ -32,21 +33,22 @@ return the probability of being each symbol as a dictionnary {class_0 : score_0 
 Keep only the classes with a score higher than a threshold
 """
 
-def computeClProb(alltraces, hyp, min_threshol,model,image_transforms, saveIm = False):
+
+def computeClProb(alltraces, hyp, min_threshol, model, image_transforms, saveIm=False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 32)
     if saveIm:
         imsave(hyp[0] + '.png', im)
     # create the list of possible classes (maybe connected to your classifier ???)
     classes = ['!', '(', ')', '+', ',', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '=',
-                 'A_', 'B_', 'C_', 'Delta', 'E_', 'F_', 'G_', 'H_', 'I_', 'L_', 'M_', 'N_', 'P_', 'R_',
-                  'S_', 'T_', 'V_', 'X_', 'Y_', '[', ']', 'a', 'alpha', 'b', 'beta', 'c', 'cos', 'd', 'div',
-                   'div_op', 'dot', 'e', 'exists', 'f', 'forall', 'g', 'gamma', 'geq', 'gt', 'h', 'i', 'in',
+               'A_', 'B_', 'C_', 'Delta', 'E_', 'F_', 'G_', 'H_', 'I_', 'L_', 'M_', 'N_', 'P_', 'R_',
+               'S_', 'T_', 'V_', 'X_', 'Y_', '[', ']', 'a', 'alpha', 'b', 'beta', 'c', 'cos', 'd', 'div',
+               'div_op', 'dot', 'e', 'exists', 'f', 'forall', 'g', 'gamma', 'geq', 'gt', 'h', 'i', 'in',
                     'infty', 'int', 'j', 'k', 'l', 'lambda', 'ldots', 'leq', 'lim', 'log', 'lt', 'm', 'mu', 'n',
-                     'neq', 'o', 'p', 'phi', 'pi', 'pipe', 'pm', 'prime', 'q', 'r', 'rightarrow', 's',
-                      'sigma', 'sin', 'sqrt', 'sum', 't', 'tan', 'theta', 'times', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
-                      
+               'neq', 'o', 'p', 'phi', 'pi', 'pipe', 'pm', 'prime', 'q', 'r', 'rightarrow', 's',
+               'sigma', 'sin', 'sqrt', 'sum', 't', 'tan', 'theta', 'times', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+
     ##### call your classifier and fill the results ! #####
-    probs  = classify(model,image_transforms,im,classes)
+    probs = classify(model, image_transforms, im, classes)
     result = {}
     for i, x in enumerate(classes):
         prob = probs[i]
@@ -93,18 +95,19 @@ def main():
 
     model_path = "./100_classes_model_aug.pt"
     image_transforms = transforms.Compose([
-    transforms.Grayscale(),
-    transforms.ToTensor()])
+        transforms.Grayscale(),
+        transforms.ToTensor()])
 
     model = get_model(model_path)
-    
+
     for h in hyplist:
         # for each hypo, call the classifier and keep only slected classes (only the best or more)
-        prob_dict = computeClProb(traces, h, 0.05,model,image_transforms, saveimg)
-        #rewrite the new LG
+        prob_dict = computeClProb(
+            traces, h, 0.05, model, image_transforms, saveimg)
+        # rewrite the new LG
         for cl, prob in prob_dict.items():
-            output += "O," + h[0]+","+cl+"," + \
-                str(prob)+","+",".join([str(s) for s in h[1]]) + "\n"
+            output += "O;" + h[0]+";"+cl+";" + \
+                str(prob)+";"+";".join([str(s) for s in h[1]]) + "\n"
     if outputLG != "":
         with open(outputLG, "w") as text_file:
             print(output, file=text_file)
