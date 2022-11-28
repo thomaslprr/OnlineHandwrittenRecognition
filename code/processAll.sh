@@ -17,19 +17,22 @@ OUTDIR=$2
 if ! [ -d $OUTDIR ] 
 then
     mkdir $OUTDIR
-    mkdir hyp_$OUTDIR
-    mkdir seg_$OUTDIR
-    mkdir symb_$OUTDIR
+    mkdir "$OUTDIR/hyp"
+    mkdir "$OUTDIR/seg"
+    mkdir "$OUTDIR/symb"
 fi
-
+mkdir "$OUTDIR/hyp"
+mkdir "$OUTDIR/seg"
+mkdir "$OUTDIR/symb"
+mkdir "$OUTDIR/out"
 for file in $1/*.inkml
 do
     echo "Recognize: $file"
     BNAME=`basename $file .inkml`
-    OUT="$OUTDIR/$BNAME.lg"
-    OUT_hyp="$OUTDIR/hyp_$BNAME.lg"
-    OUT_seg="$OUTDIR/seg_$BNAME.lg"
-    OUT_symb="$OUTDIR/symb_$BNAME.lg"
+    OUT="$OUTDIR/out/$BNAME.lg"
+    OUT_hyp="$OUTDIR/hyp/$BNAME.lg"
+    OUT_seg="$OUTDIR/seg/$BNAME.lg"
+    OUT_symb="$OUTDIR/symb/$BNAME.lg"
     python3 ./code/segmenter.py -i $file -o $OUT_hyp 
     ERR=$? # test de l'erreur au cas où...
      python3 ./code/segmentSelect.py -o $OUT_seg  $file $OUT_hyp 
