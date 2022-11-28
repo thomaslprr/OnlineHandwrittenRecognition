@@ -29,7 +29,6 @@ used only once) with a greedy sub-optimal algorithm
 
 def parseLGscore(LG):
     sym = []
-    print("LG : {:}".format(LG))
     for lg in LG:
         # Remove whitespace and split by ","
         lg = lg.replace(" ", "").replace('\n', '').split(';')
@@ -37,7 +36,6 @@ def parseLGscore(LG):
         if lg[0] != "O":
             continue
 
-        print("lg : {:}".format(lg))
         # Select symbol id and associated stroke id (only integers)
         sym.append({'id': lg[1], 'cl': lg[2],
                    'sc': float(lg[3]), 'strk': set(lg[4:])})
