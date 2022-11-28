@@ -63,7 +63,7 @@ def usage():
 
 
 def main():
-    nbs = 2
+    nbs = 3
     inputInkml = ""
     outputLG = ""
     try:
