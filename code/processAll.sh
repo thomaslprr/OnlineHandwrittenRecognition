@@ -13,6 +13,7 @@ fi
 
 INDIR=$1
 OUTDIR=$2
+cpt = 0
 
 if ! [ -d $OUTDIR ] 
 then
@@ -26,11 +27,11 @@ mkdir "$OUTDIR/seg"
 mkdir "$OUTDIR/symb"
 mkdir "$OUTDIR/out"
 
-cpt = 0
+
 
 for file in $1/*.inkml
 do
-    if [$((cpt)) > 666];
+    if [[ $cpt -gt 670 ]];
     then
         echo "Recognize: $file"
         BNAME=`basename $file .inkml`
@@ -53,6 +54,7 @@ do
             exit 2
         fi
     fi
-    ((cpt=cpt+1))
+    cpt=$(($cpt+1))
+
 done
 echo "done."
