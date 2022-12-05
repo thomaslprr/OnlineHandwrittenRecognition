@@ -15,6 +15,7 @@ from convertInkmlToImg import parse_inkml, get_traces_data, getStrokesFromLG, co
 from skimage.io import imsave
 from model_class import classify, get_model
 from model_class_2 import classify2, get_model2
+from model_class_3 import classify3, get_model3
 import torchvision.transforms as transforms
 import numpy as np
 
@@ -36,7 +37,7 @@ Keep only the classes with a score higher than a threshold
 """
 
 
-def computeClProb(alltraces, hyp, min_threshol, model, image_transforms,model2, saveIm=False):
+def computeClProb(alltraces, hyp, min_threshol, model, image_transforms,model2,model3, saveIm=False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 32)
     if saveIm:
         imsave(hyp[0] + '.png', im)
@@ -52,7 +53,8 @@ def computeClProb(alltraces, hyp, min_threshol, model, image_transforms,model2, 
     ##### call your classifier and fill the results ! #####
     probs = classify(model, image_transforms, im, classes)
     probs2 = classify2(model2, image_transforms, im, classes)
-    probs = np.mean( np.array([probs, probs2]), axis=0 )
+    probs3 = classify3(model3, image_transforms, im, classes)
+    probs = np.mean( np.array([probs, probs2,probs3]), axis=0 )
 
     result = {}
     for i, x in enumerate(classes):
@@ -100,17 +102,19 @@ def main():
 
     model_path = "./100_classes_model_aug.pt"
     model_path2 = "./trained_model_87_accuracy.pt"
+    model_path3 = "./trained_model_best_accuracy.pt"
     image_transforms = transforms.Compose([
         transforms.Grayscale(),
         transforms.ToTensor()])
 
     model = get_model(model_path)
     model2 = get_model2(model_path2)
+    model3 = get_model3(model_path3)
 
     for h in hyplist:
         # for each hypo, call the classifier and keep only slected classes (only the best or more)
         prob_dict = computeClProb(
-            traces, h, 0.05, model, image_transforms, model2,saveimg)
+            traces, h, 0.05, model, image_transforms, model2,model3,saveimg)
         # rewrite the new LG
         for cl, prob in prob_dict.items():
             output += "O;" + h[0]+";"+cl+";" + \
