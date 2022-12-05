@@ -31,7 +31,7 @@ mkdir "$OUTDIR/out"
 
 for file in $1/*.inkml
 do
-    if [[ $cpt -gt 670 ]];
+    if [[ $cpt -gt -1 ]];
     then
         echo "Recognize: $file"
         BNAME=`basename $file .inkml`

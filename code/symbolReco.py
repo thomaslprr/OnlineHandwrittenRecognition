@@ -14,7 +14,9 @@ import getopt
 from convertInkmlToImg import parse_inkml, get_traces_data, getStrokesFromLG, convert_to_imgs, parseLG
 from skimage.io import imsave
 from model_class import classify, get_model
+from model_class_2 import classify2, get_model2
 import torchvision.transforms as transforms
+import numpy as np
 
 
 def usage():
@@ -34,21 +36,24 @@ Keep only the classes with a score higher than a threshold
 """
 
 
-def computeClProb(alltraces, hyp, min_threshol, model, image_transforms, saveIm=False):
+def computeClProb(alltraces, hyp, min_threshol, model, image_transforms,model2, saveIm=False):
     im = convert_to_imgs(get_traces_data(alltraces, hyp[1]), 32)
     if saveIm:
         imsave(hyp[0] + '.png', im)
     # create the list of possible classes (maybe connected to your classifier ???)
-    classes = ['!', '(', ')', '+', ',', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '=',
-               'A_', 'B_', 'C_', 'Delta', 'E_', 'F_', 'G_', 'H_', 'I_', 'L_', 'M_', 'N_', 'P_', 'R_',
-               'S_', 'T_', 'V_', 'X_', 'Y_', '[', ']', 'a', 'alpha', 'b', 'beta', 'c', 'cos', 'd', 'div',
-               'div_op', 'dot', 'e', 'exists', 'f', 'forall', 'g', 'gamma', 'geq', 'gt', 'h', 'i', 'in',
-                    'infty', 'int', 'j', 'k', 'l', 'lambda', 'ldots', 'leq', 'lim', 'log', 'lt', 'm', 'mu', 'n',
-               'neq', 'o', 'p', 'phi', 'pi', 'pipe', 'pm', 'prime', 'q', 'r', 'rightarrow', 's',
-               'sigma', 'sin', 'sqrt', 'sum', 't', 'tan', 'theta', 'times', 'u', 'v', 'w', 'x', 'y', 'z', '{', '}']
+    classes = ['!', '(', ')', '+', 'COMMA', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '=',
+               'A', 'B', 'C', r'\Delta', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'P', 'R',
+               'S', 'T', 'V', 'X', 'Y', '[', ']', 'a', r'\alpha', 'b', r'\beta', 'c', r'\cos', 'd', r'\div',
+               '/', '.', 'e', r'\exists', 'f', r'\forall', 'g', r'\gamma', r'\geq', r'\gt', 'h', 'i', r'\in',
+                    r'\infty', r'\int', 'j', 'k', 'l', r'\lambda', r'\ldots', r'\leq', r'\lim', r'\log', r'\lt', 'm', r'\mu', 'n',
+               r'\neq', 'o', 'p', r'\phi', '\pi', '|', r'\pm', r'\prime', 'q', 'r', r'\rightarrow', 's',
+               r'\sigma', r'\sin', r'\sqrt', '\sum', 't', r'\tan', r'\theta', r'\times', 'u', 'v', 'w', 'x', 'y', 'z', r'\{', r'\}']
 
     ##### call your classifier and fill the results ! #####
     probs = classify(model, image_transforms, im, classes)
+    probs2 = classify2(model2, image_transforms, im, classes)
+    probs = np.mean( np.array([probs, probs2]), axis=0 )
+
     result = {}
     for i, x in enumerate(classes):
         prob = probs[i]
@@ -94,16 +99,18 @@ def main():
     output = ""
 
     model_path = "./100_classes_model_aug.pt"
+    model_path2 = "./trained_model_87_accuracy.pt"
     image_transforms = transforms.Compose([
         transforms.Grayscale(),
         transforms.ToTensor()])
 
     model = get_model(model_path)
+    model2 = get_model2(model_path2)
 
     for h in hyplist:
         # for each hypo, call the classifier and keep only slected classes (only the best or more)
         prob_dict = computeClProb(
-            traces, h, 0.05, model, image_transforms, saveimg)
+            traces, h, 0.05, model, image_transforms, model2,saveimg)
         # rewrite the new LG
         for cl, prob in prob_dict.items():
             output += "O;" + h[0]+";"+cl+";" + \
