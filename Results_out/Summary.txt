@@ -1,5 +1,5 @@
 LgEval Evaluation Summary
-Mon Dec  5 13:55:40 2022
+Mon Dec  5 19:03:31 2022
 
 Output File Directory:  ./data/output_files/out/
 Ground Truth Directory: ./data/GT/
@@ -8,18 +8,18 @@ Ground Truth Directory: ./data/GT/
 
   Directed   Rate(%)     Total   Correct    Errors    SegErr     ClErr    RelErr
 ---------------------------------------------------------------------------------
-     Nodes     60.47     16621     10050      6571
-     Edges     91.65    325596    298419     27177      5414       972     20791
+     Nodes     60.84     16621     10113      6508
+     Edges     91.68    325596    298514     27082      5292       982     20808
 
-     Total     90.14    342217    308469     33748
+     Total     90.18    342217    308627     33590
 
 
 Undirected   Rate(%)     Total   Correct    Errors    SegErr     ClErr    RelErr
 ---------------------------------------------------------------------------------
-     Nodes     60.47     16621     10050      6571
-Node Pairs     85.27    162798    138814     23984      2707       486     20791
+     Nodes     60.84     16621     10113      6508
+Node Pairs     85.29    162798    138853     23945      2646       491     20808
 
-     Total     82.97    179419    148864     30555
+     Total     83.03    179419    148966     30453
 
      SegErr: merge/split   ClErr: valid merge class error   RelErr: relation error
 
@@ -28,9 +28,9 @@ Node Pairs     85.27    162798    138814     23984      2707       486     20791
 
            Recall(%)   Prec(%) 2RP/(R+P)   Targets   Correct  FalseNeg *Detected *FalsePos
 ------------------------------------------------------------------------------------------
-   Objects     74.83     80.59     77.60     12191      9122      3069     11319      2197
- + Classes     61.44     66.17     63.72     12191      7490      4701     11319      3829
- Class/Det     82.11                          9122      7490
+   Objects     75.33     81.12     78.12     12191      9183      3008     11320      2137
+ + Classes     61.75     66.50     64.04     12191      7528      4663     11320      3792
+ Class/Det     81.98                          9183      7528
 
  Relations      0.00    100.00      0.00     11134         0     11134         0         0
  + Classes      0.00    100.00      0.00     11134         0     11134         0         0
@@ -44,9 +44,9 @@ Node Pairs     85.27    162798    138814     23984      2707       486     20791
 
              Rate(%)     Total   Correct    Errors
 ---------------------------------------------------
-   Objects     15.26      1147       175       972
- + Classes      5.84      1147        67      1080
- Class/Det     38.29       175        67          
+   Objects     15.95      1147       183       964
+ + Classes      5.49      1147        63      1084
+ Class/Det     34.43       183        63          
 
  Relations      0.00      1147         0      1147
  + Classes      0.00      1147         0      1147
@@ -61,6 +61,6 @@ Node Pairs     85.27    162798    138814     23984      2707       486     20791
 
                    0         1         2         3         4         5        >5
 ----------------------------------------------------------------------------------
-Num. Files         0         0        15        20        28        24      1060
-Cum. Files         0         0        15        35        63        87      1147
+Num. Files         0         1        14        20        29        27      1056
+Cum. Files         0         1        15        35        64        91      1147
 

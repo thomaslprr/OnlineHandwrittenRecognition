@@ -1,6 +1,5 @@
 *N,10,x,1.0,:vs:,\infty,1.0
 *N,1,ABSENT,1.0,:vs:,\lim,1.0
-*N,5,\alpha,1.0,:vs:,\infty,1.0
 *N,6,k,1.0,:vs:,R,1.0
 *E,1,0,_,1.0,:vs:,\lim,1.0
 *E,1,2,_,1.0,:vs:,Below,1.0

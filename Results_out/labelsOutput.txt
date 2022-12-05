@@ -34,7 +34,6 @@ R
 S
 T
 V
-X
 Y
 [
 \alpha
@@ -45,15 +44,14 @@ Y
 \gamma
 \geq
 \gt
-\in
 \infty
 \int
-\lambda
 \ldots
 \leq
 \lim
 \log
 \lt
+\mu
 \phi
 \pi
 \pm
@@ -131,10 +129,8 @@ T
 \cos
 \div
 \geq
-\in
 \infty
 \int
-\lambda
 \ldots
 \leq
 \lim
